@@ -126,3 +126,34 @@ Notificações Push: Adicionar notificações para lembrar o usuário de complet
 Este projeto demonstra como construir um formulário multi-etapas em Flutter com um ciclo completo de salvamento de dados localmente e redefinição automática do estado após a submissão. Ele oferece uma estrutura escalável e modular, permitindo futuras expansões e melhorias de funcionalidade.
 
 Se você deseja personalizar o comportamento ou adicionar mais etapas ao formulário, basta modificar a lógica dentro dos widgets do Stepper ou adicionar novos campos no FormStateNotifier.
+
+
+
+Como Rodar o Código 
+
+Instalar o Flutter:
+
+Baixe o Flutter SDK em: https://flutter.dev/docs/get-started/install.
+Após o download, descompacte o SDK em um diretório acessível no seu sistema.
+Adicione o Flutter ao PATH do sistema para que o comando flutter possa ser utilizado no terminal.
+No terminal, execute o comando: flutter doctor para verificar se o Flutter foi instalado corretamente e identificar o que ainda precisa ser configurado.
+Clonar o Repositório:
+
+Abra o terminal ou prompt de comando.
+Execute o comando git clone https://github.com/seu-usuario/seu-repositorio.git para clonar o repositório.
+Acesse o diretório do projeto com cd form_app.
+Instalar as Dependências:
+
+No terminal, execute flutter pub get para instalar todas as dependências especificadas no arquivo pubspec.yaml.
+Rodar o Projeto:
+
+Conecte um dispositivo Android ou iOS, ou inicie um emulador.
+No terminal, execute flutter run para rodar o projeto no dispositivo ou emulador conectado.
+Rodar no Emulador ou Dispositivo Físico:
+
+Se estiver usando um emulador, inicie-o pelo Android Studio ou pelo terminal com flutter emulators --launch nome_do_emulador.
+Para um dispositivo físico, habilite o modo de desenvolvedor e conecte o dispositivo ao computador via USB. Execute flutter devices e depois flutter run.
+Compilar para Web (Opcional):
+
+Ative o Flutter Web com o comando flutter config --enable-web.
+Execute o projeto no navegador com flutter run -d chrome.
