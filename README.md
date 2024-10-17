@@ -11,78 +11,118 @@ integrantes
 
 550200 - Leonardo Oliveira Esparza
 
-Documentação do Projeto de Formulários com Validação
-1. Introdução
-Este projeto foi desenvolvido utilizando Flutter e demonstra a criação de diferentes tipos de formulários com validação de dados e boas práticas de UX. Ele inclui exemplos de um Formulário de Login, um Formulário com Validação de Email e Senha, e um Formulário Multi-Etapas, cada um validando entradas e proporcionando uma experiência de usuário completa. Várias melhorias foram implementadas para enriquecer a funcionalidade e a usabilidade do sistema.
+integrantes 
+552421 - Flavio Sousa Vasconcelos
+552368 - WELLINGTON DE OLIVEIRA URCINO DA SILVA
+97887 - João Carlos França Figueiredo
+550200 - Leonardo Oliveira Esparza
+
+Documentação do Projeto: Formulário Multi-Etapas com Reset Automático
+1. Descrição Geral do Projeto
+
+Este projeto consiste em um Formulário Multi-Etapas desenvolvido em Flutter. Ele guia o usuário por uma sequência de etapas para preencher informações pessoais, como nome, email, telefone, gênero, data de nascimento, e aceitar os termos e condições.
+
+O projeto também inclui uma funcionalidade de reset automático do formulário. Assim que o formulário é concluído e salvo, ele é automaticamente redefinido para permitir que o usuário crie um novo formulário desde o início, sem a necessidade de recarregar a página ou manualmente apagar os campos preenchidos.
 
 2. Funcionalidades Principais
 
-2.1 Formulário de Login
-O formulário de login inclui dois campos: Nome de Usuário e Senha.
-Há uma validação simples para garantir que ambos os campos estejam preenchidos.
-Simulação de login bem-sucedido com as credenciais corretas (usuário: admin, senha: 1234).
-Exibe mensagens de erro caso o nome de usuário ou a senha estejam incorretos ou em branco.
+Formulário Multi-Etapas: Utiliza o widget Stepper para dividir o preenchimento de dados em várias etapas.
+Salvamento Local dos Dados: O formulário salva os dados preenchidos utilizando o pacote SharedPreferences.
+Reset Automático: Após a conclusão do preenchimento do formulário, todos os campos são redefinidos automaticamente, e o formulário volta ao seu estado inicial para um novo preenchimento.
+Validação de Termos e Condições: O usuário é obrigado a aceitar os termos e condições antes de concluir o preenchimento do formulário.
 
+3. Estrutura de Pastas
 
-2.2 Formulário com Validação de Email e Senha
-O formulário permite validar um email e uma senha.
-A senha deve conter ao menos 8 caracteres, uma letra maiúscula e um número.
-Validação de Confirmação de Senha, garantindo que a senha inserida nos dois campos seja a mesma.
-Exibe mensagens de erro específicas se as validações falharem.
-
-2.3 Formulário Multi-Etapas
-Um formulário dividido em várias etapas, cada uma coletando uma informação específica: Nome, Email, Data de Nascimento, Gênero e Telefone.
-Cada etapa inclui validação de campos antes de permitir o avanço para a próxima etapa.
-Exibe uma etapa final de Confirmação, onde o usuário pode verificar as informações inseridas antes de concluir.
-Inclui um campo para o usuário aceitar os Termos e Condições antes de finalizar o formulário.
-
-3. Melhorias Implementadas
-
-
-3.1 Adição de Campo de Data de Nascimento (com DatePicker)
-Foi adicionado um campo no formulário multi-etapas para que o usuário escolha sua Data de Nascimento utilizando um DatePicker. Esse campo valida se a data foi selecionada antes de prosseguir para a próxima etapa.
-
-
-3.2 Adição de Campo de Gênero (com Radio Buttons)
-O campo de Gênero foi implementado utilizando botões de rádio, permitindo ao usuário escolher entre as opções: Masculino, Feminino e Outro. A escolha é validada como obrigatória antes de continuar.
-
-
-3.3 Aceite de Termos e Condições (com Checkbox)
-Uma etapa final foi adicionada ao formulário multi-etapas, onde o usuário deve marcar uma caixa de seleção (checkbox) confirmando que aceita os Termos e Condições antes de concluir o processo. Caso não seja marcado, o formulário não pode ser submetido.
-
-
-3.4 Campo de Confirmação de Senha no Formulário de Validação
-Adicionamos um campo de Confirmar Senha no formulário de validação de email e senha, para garantir que o usuário insira a mesma senha duas vezes. A validação garante que as duas entradas de senha coincidam.
-
-
-3.5 Feedback Visual para Campos Preenchidos Corretamente
-Foi implementada uma funcionalidade que altera a borda dos campos para verde quando as entradas são válidas, proporcionando um feedback visual instantâneo ao usuário. Isso melhora a experiência de preenchimento dos formulários.
-
-4. Estrutura do Projeto
 lib/
-  ├── src/
-  │    │    ├── multi_step_form.dart         # Formulário Multi-Etapas
-  │    │    ├── email_password_form.dart     # Formulário de Validação de Email e Senha
-  │    │    └── login_form.dart              # Formulário de Login
-  │    └── form_state_notifier.dart          # Gerencia o estado e validação dos dados do 
-  └── main.dart                              # Arquivo principal com a navegação entre os formulários
+├── src/
+│   ├── form_state_notifier.dart   # Gerencia o estado do formulário e inclui a função de reset
+│   ├── multi_step_form.dart       # Implementa o formulário multi-etapas com reset automático
+└── main.dart                      # Arquivo principal do aplicativo que gerencia a navegação
+
+4. Dependências
+Este projeto utiliza as seguintes dependências no arquivo pubspec.yaml:
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  intl: ^0.19.0            # Para formatação de datas
+  shared_preferences: ^2.0.15 # Para salvamento local dos dados
+  provider: ^6.0.0         # Para gerenciamento de estado do formulário
+O pacote provider é utilizado para gerenciar o estado do formulário através da classe FormStateNotifier. O pacote shared_preferences é utilizado para salvar os dados localmente e permitir que o usuário possa recuperá-los em futuras sessões do aplicativo.
 
 
-5. Como Executar o Projeto
+5. Explicação Detalhada do Código
 
-5.1 Clonar o Repositório
-git clone https://github.com/seu-repositorio.git
+5.1 form_state_notifier.dart
+Este arquivo contém a lógica de gerenciamento do estado do formulário. Ele armazena os dados inseridos pelo usuário e salva as informações localmente usando SharedPreferences.
 
-5.2 Instalar as Dependências
-flutter pub get
+Variáveis de Estado: São utilizadas variáveis como _name, _email, _phone, _gender, _birthDate, e _acceptTerms para armazenar os valores dos campos do formulário.
+Função saveFormData: Salva os dados do formulário em SharedPreferences como um objeto JSON.
+Função resetForm: Redefine todos os campos para seus valores padrão (vazios ou falsos).
+Exemplo de Função resetForm:
 
-5.3 Executar o Projeto
-flutter run
+void resetForm() {
+  _name = '';
+  _email = '';
+  _phone = '';
+  _gender = '';
+  _birthDate = '';
+  _acceptTerms = false;
+  notifyListeners();  // Notifica os widgets dependentes para que sejam atualizados
+}
 
-6. Tecnologias Utilizadas
 
-Flutter: Framework utilizado para desenvolvimento do aplicativo.
+5.2 multi_step_form.dart
 
-Provider: Utilizado para gerenciamento de estado reativo.
+Este arquivo implementa o formulário multi-etapas. O Stepper é utilizado para guiar o usuário por cada etapa do formulário.
 
-Dart: Linguagem de programação usada para implementar a lógica do aplicativo.
+Reset Automático: Após o preenchimento completo do formulário, o método resetForm() é chamado para redefinir o estado, e o Stepper retorna à primeira etapa.
+Exemplo da Chamada de resetForm ao Concluir o Formulário:
+
+if (formState.acceptTerms) {
+  formState.saveFormData();  // Salva os dados após o preenchimento
+  formState.resetForm();  // Reseta o formulário após salvar
+  ScaffoldMessenger.of(context).showSnackBar(
+    const SnackBar(content: Text('Formulário Completo!')),
+  );
+  setState(() {
+    _currentStep = 0;  // Reseta o Stepper para a primeira etapa
+  });
+}
+
+5.3 main.dart
+
+O arquivo main.dart inicializa o aplicativo e configura a navegação. Ao clicar no botão "Preencher Novo Formulário", o usuário é direcionado para o formulário multi-etapas.
+
+Uso de Provider: O Provider é utilizado para disponibilizar a instância do FormStateNotifier para o formulário multi-etapas.
+Exemplo de Inicialização do Aplicativo:
+
+void main() {
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => FormStateNotifier()),
+      ],
+      child: const MyApp(),
+    ),
+  );
+}
+
+6. Fluxo do Usuário
+Início: O usuário inicia o aplicativo na tela inicial, onde pode clicar no botão "Preencher Novo Formulário".
+Preenchimento do Formulário: O usuário preenche os dados em diferentes etapas. Cada etapa pode ser validada antes de prosseguir.
+Aceitar Termos e Condições: Para concluir o formulário, o usuário deve aceitar os termos e condições.
+Finalização e Reset: Após a conclusão, o formulário é salvo, o usuário é notificado, e os campos são automaticamente redefinidos para permitir um novo preenchimento.
+
+7. Personalização e Extensibilidade
+Este projeto é altamente extensível. Aqui estão algumas sugestões de melhorias e personalizações:
+
+Validação Avançada: Adicionar validações avançadas, como verificação de email e número de telefone.
+Armazenamento em Nuvem: Utilizar um backend para armazenar os formulários em um banco de dados remoto, em vez de salvar localmente.
+Temas Customizados: Implementar suporte a múltiplos temas visuais, permitindo que o usuário escolha o estilo da interface.
+Notificações Push: Adicionar notificações para lembrar o usuário de completar o formulário, caso ele seja deixado incompleto.
+
+8. Conclusão
+Este projeto demonstra como construir um formulário multi-etapas em Flutter com um ciclo completo de salvamento de dados localmente e redefinição automática do estado após a submissão. Ele oferece uma estrutura escalável e modular, permitindo futuras expansões e melhorias de funcionalidade.
+
+Se você deseja personalizar o comportamento ou adicionar mais etapas ao formulário, basta modificar a lógica dentro dos widgets do Stepper ou adicionar novos campos no FormStateNotifier.
